@@ -6,7 +6,6 @@ Unit tests from mathics.builtin.drawing.plot
 from test.helper import check_evaluation, session
 
 import pytest
-
 from mathics.core.expression import Expression
 from mathics.core.symbols import Symbol
 from mathics.core.util import print_expression_tree
