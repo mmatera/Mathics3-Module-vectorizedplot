@@ -32,7 +32,7 @@ jobs:
         git clone https://github.com/Mathics3/mathics-core
         cd mathics-core
         pip3 install -e .[full]
-        bash -x admin-tools/make-JSON-tables.sh)
+        bash -x admin-tools/make-JSON-tables.sh
         cd ..
     - name: Install Mathic3 vectorizedplot Module
       run: |
