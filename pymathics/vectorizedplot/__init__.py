@@ -23,10 +23,12 @@ Showing something visually can be done in a number of ways:
 """
 
 
-from pymathics.vectorizedplot.plot_plot3d.py import SphericalPlot3D
+# from pymathics.vectorizedplot.plot_plot3d.py import SphericalPlot3D
 from pymathics.vectorizedplot.version import __version__
 
-__all__ = ("__version__", "SphericalPlot3D", "pymathics_version_data")
+__all__ = ("__version__",
+           #"SphericalPlot3D",
+           "pymathics_version_data")
 
 # To be recognized as an external mathics module, the following variable
 # is required:

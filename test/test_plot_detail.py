@@ -355,10 +355,6 @@ def all_yaml_tests_generator(fns=None):
 
 
 @pytest.mark.skipif(
-    not os.environ.get("MATHICS_PLOT_DETAILED_TESTS", False),
-    reason="Run just if required",
-)
-@pytest.mark.skipif(
     pyodide is not None,
     reason="Does not work in Pyodide",
 )

@@ -16,6 +16,7 @@ dependencies = [
         "Mathics3-Module-Base >= 9.0.0",
         "Mathics3 >= 9.0.0",
         "palettable",
+        "scikit-image",
 ]
 requires-python = ">=3.10"
 readme = "README.rst"

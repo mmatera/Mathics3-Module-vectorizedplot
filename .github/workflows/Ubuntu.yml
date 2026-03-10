@@ -1,4 +1,4 @@
-name: Mathics3-Module-hello (ubuntu)
+name: Mathics3-Module-vectorizedplot (ubuntu)
 
 on:
   push:

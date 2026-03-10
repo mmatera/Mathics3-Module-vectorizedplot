@@ -1,4 +1,4 @@
-name: Mathics3-Module-hello (MS Windows)
+name: Mathics3-Module-vectorizedplot (MS Windows)
 
 on:
   push:
