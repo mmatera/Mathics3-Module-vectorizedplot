@@ -86,7 +86,7 @@ except ImportError:
     pyodide = None  # noqa
 
 
-from test.helper import session, check_evaluation
+from test.helper import session
 
 from mathics.builtin.drawing import plot
 from mathics.core.expression import Expression
