@@ -6,7 +6,7 @@ requires = [
         "matplotlib",
         "scipy>=1.10.0",
 	"sympy>=1.11,<1.13",
-        "Mathics3-Module-Base >= 9.0.0",
+        "Mathics3-Module-Base>=9.0.0",
 ]
 build-backend = "setuptools.build_meta"
 
@@ -14,8 +14,8 @@ build-backend = "setuptools.build_meta"
 name = "Mathics3-vectorizedplot"
 description = 'Mathics3 vectorized plot module'
 dependencies = [
-        "Mathics3 >= 9.0.0",
-        "Mathics3-Module-Base >= 9.0.0",
+        "Mathics3>=9.0.0",
+        "Mathics3-Module-Base>=9.0.0",
         "palettable",
         "scikit-image",
 ]
