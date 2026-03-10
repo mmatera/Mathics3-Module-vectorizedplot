@@ -34,7 +34,7 @@ try:
         "__version__",
         "pymathics_version_data"
     )
-except Exception:
+except ModuleNotFoundError:
     __all__ = (
         "__version__",
         "pymathics_version_data"
