@@ -26,8 +26,13 @@ from pymathics.vectorizedplot.version import __version__
 
 ALREADY_INSTALLED = True
 try:
-    from .plot_plot3d import ContourPlot3D, ParametricPlot3D, SphericalPlot3D
+    from pymathics.vectorizedplot.plot_plot3d import (
+        ContourPlot3D,
+        ParametricPlot3D,
+        SphericalPlot3D,
+    )
 except ModuleNotFoundError:
+    print("module cannot be loaded...")
     ALREADY_INSTALLED = True
 
 
