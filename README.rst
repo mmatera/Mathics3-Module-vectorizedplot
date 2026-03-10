@@ -1,26 +1,15 @@
-This is a Mathics3 Python Module showing the classic "Hello, World!"
-The purpose is to demonstrate how to write a Mathics3 Python Module which extends Mathics3 by adding a function, but written in Python.
+This is a Mathics3 Python Module that implements some of the Plot routines used in Mathics3 using the faster vectorized routines proposed by @bdlucas1.
 
-You can also use this as a template to clone if you want to create your own Mathics3 Module.
+By now, it is a proof of concept, which implements `ContourPlot3D`, `Spherical3D` and `ParametricPlot3D`.
 
-To install in development mode (run code from the source tree):
-
-::
-
-   $ make develop
-
-
-After installing inside Mathics3, you can load this using the
-``LoadModule[]`` function.
-
-Then the function ```Hello[]`` is available::
+To make these routines available:
 
       $ mathicsscript
-      In[1]:= LoadModule["pymathics.hello"]
-      Out[1]= pymathics.hello
+      In[1]:= LoadModule["pymathics.vectorizedplot"]
+      Out[1]= pymathics.vectorizedplot
 
-      In[2]:= Hello["World"]
-      Out[2]:= Hello, World!
+      In[2]:= ContourPlot[x, {x, -2, 2}, {y, -1, 1}, Contours->{0, 0.5}, AspectRatio->Automatic]
+      Out[2]:= ...
 
 You can test with ``py.test``::
 
