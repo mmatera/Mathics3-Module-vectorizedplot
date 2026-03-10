@@ -30,10 +30,10 @@ jobs:
         # (cd mathics-core && pip3 install -e .[full])
         # (cd mathics-core && bash ./admin-tools/make-JSON-tables.sh)
         # python -m pip install -e git+https://github.com/Mathics3/Mathics3-Module-Base#egg=Mathics3-Module-Base
-    - name: Install Mathic3 Hello Module
+    - name: Install Mathic3 vectorizedplot Module
       run: |
         python -m pip install Mathics3
         python -m pip install --no-build-isolation -e .
-    - name: Test Mathics3 Hello Module
+    - name: Test Mathics3 vectorizedplot Module
       run: |
         make check
