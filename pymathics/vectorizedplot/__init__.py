@@ -22,12 +22,17 @@ Showing something visually can be done in a number of ways:
 </ul>
 """
 
-from pymathics.vectorizedplot.plot_plot3d import (
-    ContourPlot3D,
-    ParametricPlot3D,
-    SphericalPlot3D,
-)
 from pymathics.vectorizedplot.version import __version__
+
+try:
+    from pymathics.vectorizedplot.plot_plot3d import (
+        ContourPlot3D,
+        ParametricPlot3D,
+        SphericalPlot3D,
+    )
+except ModuleNotFoundError as e:
+    print("failed to load the module", e)
+
 
 # To be recognized as an external mathics module, the following variable
 # is required:
