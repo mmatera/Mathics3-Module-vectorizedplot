@@ -23,16 +23,22 @@ Showing something visually can be done in a number of ways:
 """
 
 
-from pymathics.vectorizedplot.plot_plot3d import ContourPlot3D, ParametricPlot3D, SphericalPlot3D
 from pymathics.vectorizedplot.version import __version__
+try:
+    from pymathics.vectorizedplot.plot_plot3d import ContourPlot3D, ParametricPlot3D, SphericalPlot3D
 
-__all__ = (
-    "ContourPlot3D",
-    "ParametricPlot3D",
-    "SphericalPlot3D",
-    "__version__",
-    "pymathics_version_data"
-)
+    __all__ = (
+        "ContourPlot3D",
+        "ParametricPlot3D",
+        "SphericalPlot3D",
+        "__version__",
+        "pymathics_version_data"
+    )
+except Exception:
+    __all__ = (
+        "__version__",
+        "pymathics_version_data"
+    )
 
 # To be recognized as an external mathics module, the following variable
 # is required:
@@ -40,7 +46,7 @@ __all__ = (
 pymathics_version_data = {
     "author": "The Mathics3 Team",
     "version": __version__,
-    "requires": [],
+    "requires": ["scikit-image"],
 }
 
 # This tells documentation how to sort this module
