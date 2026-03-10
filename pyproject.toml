@@ -10,11 +10,12 @@ requires = [
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "Mathics3-hello"
-description = 'Mathics3 Hello, World! module'
+name = "Mathics3-vectorizedplot"
+description = 'Mathics3 Vectorized plot! module'
 dependencies = [
         "Mathics3-Module-Base >= 9.0.0",
         "Mathics3 >= 9.0.0",
+        "palettable",
 ]
 requires-python = ">=3.10"
 readme = "README.rst"
@@ -41,8 +42,8 @@ classifiers = [
 dynamic = ["version"]
 
 [project.urls]
-Homepage = "https://github.com/Mathics3/Mathics3-Module-hello"
-Downloads = "https://github.com/Mathics3/Mathics3_module-hello/releases"
+Homepage = "https://github.com/Mathics3/Mathics3-Module-vectorizedplot"
+Downloads = "https://github.com/Mathics3/Mathics3_module-vectorizedplot/releases"
 
 [project.optional-dependencies]
 dev = [
@@ -51,8 +52,8 @@ dev = [
 
 [tool.setuptools]
 packages = [
-    "pymathics.hello",
+    "pymathics.vectorizedplot",
 ]
 
 [tool.setuptools.dynamic]
-version = {attr = "pymathics.hello.__version__"}
+version = {attr = "pymathics.vectorizedplot.__version__"}

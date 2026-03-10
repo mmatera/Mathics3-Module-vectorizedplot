@@ -1,36 +1,32 @@
-# -*- coding: utf-8 -*-
 """
-Example Mathics3 Module
+Plotting, Graphing, and Drawing
 
-This is an example of an external Mathics3 Module.
+Showing something visually can be done in a number of ways:
 
-A Mathics3 Module is a Python module which can be loaded into Mathics using the
-``LoadModule[]`` method.
-
-In particular, to load this after installing this module as a Python module run inside
-Mathics:
-
-   ::
-
-   In[1]:= LoadModule["pymathics.hello"]
-   Out[1]= pymathics.hello
-
-If you don't get an error, you should then be able to run:
-
-   ::
-
-   In[2]:= Hello["World"]
-   Out[2]:= Hello, World!
-
-   In[3]:= PyMathics`$HelloUser
-   Out[3]:= $your-login-name$
-
+<ul>
+  <li>Starting with complete images and modifying them using the 'Image' \
+      Built-in function.
+  <li>Use pre-defined 2D or 3D objects like <url>
+  :'Circle':
+  /doc/reference-of-built-in-symbols/drawing-graphics/circle</url> and <url>
+  :'Cuboid':
+/doc/reference-of-built-in-symbols/plotting-graphing-and-drawing/three-dimensional-graphics/cuboid/</url> \
+  and place them in a coordinate space.
+  <li>Compute the points of the space using a function. This is done using functions \
+  like <url>
+  :'Plot':
+  /doc/reference-of-built-in-symbols/plotting-graphing-and-drawing/general-graphical-plots/plot</url> \
+  and <url>
+  :'ListPlot':
+  /doc/reference-of-built-in-symbols/plotting-graphing-and-drawing/list-plots/listplot</url>.
+</ul>
 """
 
-from pymathics.vectorizedplot.plot import SphericalPlot3D
+
+from pymathics.vectorizedplot.plot_plot3d.py import SphericalPlot3D
 from pymathics.vectorizedplot.version import __version__
 
-__all__ = ("__version__", "Hello", "pymathics_version_data")
+__all__ = ("__version__", "SphericalPlot3D", "pymathics_version_data")
 
 # To be recognized as an external mathics module, the following variable
 # is required:
@@ -40,3 +36,8 @@ pymathics_version_data = {
     "version": __version__,
     "requires": [],
 }
+
+# This tells documentation how to sort this module
+sort_order = "mathics.builtin.plotting-graphing-and-drawing"
+
+

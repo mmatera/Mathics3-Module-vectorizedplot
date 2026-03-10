@@ -49,10 +49,10 @@ clean-pyc:
 
 #:
 doctest:
-	MATHICS_CHARACTER_ENCODING="ASCII" $(PYTHON) -m mathics.docpipeline -l pymathics.hello -c 'Example Mathics3 Module' $o
+	MATHICS_CHARACTER_ENCODING="ASCII" $(PYTHON) -m mathics.docpipeline -l pymathics.vectorizedplot -c 'Mathics3 vectorizedplot Module' $o
 #: Run py.test tests. Use environment variable "o" for pytest options
 pytest:
-	py.test test $o
+	MATHICS_CHARACTER_ENCODING="ASCII" py.test test $o
 
 
 
