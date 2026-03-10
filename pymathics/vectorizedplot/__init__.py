@@ -24,14 +24,22 @@ Showing something visually can be done in a number of ways:
 
 from pymathics.vectorizedplot.version import __version__
 
+# The try block is needed because at installation time, dependencies are not
+# available. After the installation is successfull, we want to make this availabe.
 try:
     from pymathics.vectorizedplot.plot_plot3d import (
         ContourPlot3D,
         ParametricPlot3D,
         SphericalPlot3D,
     )
-except ModuleNotFoundError as e:
-    print("failed to load the module", e)
+
+    _BUILTINS_ = (
+        "ContourPlot3D",
+        "ParametricPlot3D",
+        "SphericalPlot3D",
+    )
+except ModuleNotFoundError:
+    _BUILTINS_ = tuple()
 
 
 # To be recognized as an external mathics module, the following variable
@@ -47,10 +55,7 @@ pymathics_version_data = {
 sort_order = "mathics.builtin.plotting-graphing-and-drawing"
 
 
-__all__ = (
-    "ContourPlot3D",
-    "ParametricPlot3D",
-    "SphericalPlot3D",
+__all__ = tuple(_BUILTINS_) + (
     "__version__",
     "pymathics_version_data",
 )
