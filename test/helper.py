@@ -8,26 +8,23 @@ from mathics.session import MathicsSession
 
 import_and_load_builtins()
 
-# Set up a Mathics session with definitions.
+# Set up two Mathics session with definitions, one for the vectorized routines and
+# other for the standard.
 # For consistency set the character encoding ASCII which is
 # the lowest common denominator available on all systems.
-session = MathicsSession(character_encoding="ASCII")
+
+SESSIONS = {
+    # test.helper session is going to be set up with the library.
+    True: MathicsSession(character_encoding="ASCII"),
+    # Default non-vectorized
+    False: MathicsSession(character_encoding="ASCII"),
+}
 
 
-def reset_session(add_builtin=True, catch_interrupt=False):
-    global session
-    session.reset()
-
-
-def evaluate_value(str_expr: str):
-    expr = session.evaluate(str_expr)
+def expr_to_value(expr: BaseElement):
     if isinstance(expr, Symbol):
         return expr.name
     return expr.value
-
-
-def evaluate(str_expr: str):
-    return session.evaluate(str_expr)
 
 
 def check_evaluation(
@@ -39,6 +36,7 @@ def check_evaluation(
     to_string_expected: bool = True,
     to_python_expected: bool = False,
     expected_messages: Optional[tuple] = None,
+    use_vectorized: bool = True,
 ):
     """
     Helper function to test Mathics expression against
@@ -66,34 +64,41 @@ def check_evaluation(
     expected_messages ``Optional[tuple[str]]``: If a tuple of strings are passed into this parameter, messages and prints raised during
                     the evaluation of ``str_expr`` are compared with the elements of the list. If ``None``, this comparison
                     is ommited.
+
+    use_vectorized: bool
+          If True, use the session with `pymathics.vectorizedplot` loaded.
     """
+    current_session = SESSIONS[use_vectorized]
+
     if str_expr is None:
-        reset_session()
-        evaluate('LoadModule["pymathics.vectorizedplot"]')
+        current_session.reset()
+        current_session.evaluate('LoadModule["pymathics.vectorizedplot"]')
         return
 
     if to_string_expr:
         str_expr = f"ToString[{str_expr}]"
-        result = evaluate_value(str_expr)
+        result = expr_to_value(current_session.evaluate(str_expr))
     else:
-        result = evaluate(str_expr)
+        result = current_session.evaluate(str_expr)
 
-    outs = [out.text for out in session.evaluation.out]
+    outs = [out.text for out in current_session.evaluation.out]
 
     if to_string_expected:
         if hold_expected:
             expected = str_expected
         else:
             str_expected = f"ToString[{str_expected}]"
-            expected = evaluate_value(str_expected)
+            expected = expr_to_value(current_session.evaluate(str_expected))
     else:
         if hold_expected:
             if to_python_expected:
                 expected = str_expected
             else:
-                expected = evaluate(f"HoldForm[{str_expected}]").elements[0]
+                expected = current_session.evaluate(
+                    f"HoldForm[{str_expected}]"
+                ).elements[0]
         else:
-            expected = evaluate(str_expected)
+            expected = current_session.evaluate(str_expected)
             if to_python_expected:
                 expected = expected.to_python(string_quotes=False)
 

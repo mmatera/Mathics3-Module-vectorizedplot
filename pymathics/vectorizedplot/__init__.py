@@ -27,16 +27,34 @@ from pymathics.vectorizedplot.version import __version__
 # The try block is needed because at installation time, dependencies are not
 # available. After the installation is successfull, we want to make this availabe.
 try:
+    from pymathics.vectorizedplot.plot_plot import (
+        LogPlot,
+        ParametricPlot,
+        Plot,
+        PolarPlot,
+    )
     from pymathics.vectorizedplot.plot_plot3d import (
+        ComplexPlot,
+        ComplexPlot3D,
         ContourPlot,
         ContourPlot3D,
+        DensityPlot,
         ParametricPlot3D,
+        Plot3D,
         SphericalPlot3D,
     )
 
     _BUILTINS_ = (
+        "ComplexPlot",
+        "ComplexPlot3D",
         "ContourPlot",
         "ContourPlot3D",
+        "DensityPlot",
+        "LogPlot",
+        "ParametricPlot",
+        "PolarPlot",
+        "Plot",
+        "Plot3D",
         "ParametricPlot3D",
         "SphericalPlot3D",
     )

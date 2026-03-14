@@ -79,19 +79,20 @@ except ImportError:
     # print(f"WARNING: not running PNG tests because {oops}")
     cairosvg = None  # noqa
 
-# check if pyoidide so we can skip some there
+# check if pyodide so we can skip some there
 try:
     import pyodide
 except ImportError:
     pyodide = None  # noqa
 
 
-from test.helper import check_evaluation, session
+from test.helper import SESSIONS, check_evaluation
 
 from mathics.builtin.drawing import plot
 from mathics.core.expression import Expression
 from mathics.core.symbols import Symbol
 from mathics.core.util import print_expression_tree
+from mathics.session import MathicsSession
 
 from .svg_outline import outline_svg
 
@@ -226,9 +227,9 @@ def one_test(name: str, str_expr: str, vec: bool, svg: bool, opts: str):
     # whether vectorized test
     if vec:
         name += "-vec"
-        plot.use_vectorized_plot = vec
     else:
         name += "-cls"
+    current_session = SESSIONS[vec]
 
     # update name and splice in options depending on
     # whether default or with-options test
@@ -240,12 +241,12 @@ def one_test(name: str, str_expr: str, vec: bool, svg: bool, opts: str):
 
     try:
         # evaluate the expression to be tested
-        act_expr = session.evaluate(str_expr)
-        if session.evaluation.out:
+        act_expr = current_session.evaluate(str_expr)
+        if current_session.evaluation.out:
             print("=== messages:")
-            for message in session.evaluation.out:
+            for message in current_session.evaluation.out:
                 print(message.text)
-        assert not session.evaluation.out, "no output messages expected"
+        assert not current_session.evaluation.out, "no output messages expected"
 
         # write the results to act_fn in ACT_DIR
         act_fn = os.path.join(ACT_DIR, f"{name}.txt")
@@ -262,7 +263,7 @@ def one_test(name: str, str_expr: str, vec: bool, svg: bool, opts: str):
             act_svg_fn = os.path.join(ACT_DIR, f"{name}.svg.txt")
             ref_svg_fn = os.path.join(REF_DIR, f"{name}.svg.txt")
             boxed_expr = Expression(Symbol("System`ToBoxes"), act_expr).evaluate(
-                session.evaluation
+                current_session.evaluation
             )
             act_svg = boxed_expr.to_format("svg")
             act_svg = outline_svg(
@@ -280,7 +281,7 @@ def one_test(name: str, str_expr: str, vec: bool, svg: bool, opts: str):
             act_png_fn = os.path.join(ACT_DIR, f"{name}.png")
             ref_png_fn = os.path.join(REF_DIR, f"{name}.png")
             boxed_expr = Expression(Symbol("System`ToBoxes"), act_expr).evaluate(
-                session.evaluation
+                current_session.evaluation
             )
             act_svg = boxed_expr.box_to_format("svg")
             act_svg = inject_font_style(act_svg)
@@ -397,7 +398,6 @@ if __name__ == "__main__":
     parser.add_argument("files", nargs="*", help="yaml test files")
     args = parser.parse_args()
     UPDATE_MODE = args.update
-    session.evaluate('LoadModule["pymathics.vectorizedplot"]')
 
     try:
         if args.files:

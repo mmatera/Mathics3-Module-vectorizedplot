@@ -3,7 +3,7 @@
 Unit tests from mathics.builtin.drawing.plot
 """
 
-from test.helper import check_evaluation, session
+from test.helper import SESSIONS, check_evaluation
 
 import pytest
 from mathics.core.expression import Expression
@@ -37,6 +37,7 @@ def test__listplot():
             hold_expected=True,
             failure_message=fail_msg,
             expected_messages=msgs,
+            use_vectorized=False,
         )
 
 
@@ -248,6 +249,7 @@ def test_plot(str_expr, msgs, str_expected, fail_msg):
         hold_expected=True,
         failure_message=fail_msg,
         expected_messages=msgs,
+        use_vectorized=False,
     )
 
 
@@ -302,6 +304,8 @@ def check_structure(
 
 
 def eval_and_check_structure(str_expr, str_expected):
+    session = SESSIONS[False]
+    session.reset()
     expr = session.parse(str_expr)
     result = expr.evaluate(session.evaluation)
     expected = session.parse(str_expected)
