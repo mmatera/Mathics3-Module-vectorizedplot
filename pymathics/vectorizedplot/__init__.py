@@ -28,12 +28,14 @@ from pymathics.vectorizedplot.version import __version__
 # available. After the installation is successfull, we want to make this availabe.
 try:
     from pymathics.vectorizedplot.plot_plot3d import (
+        ContourPlot,
         ContourPlot3D,
         ParametricPlot3D,
         SphericalPlot3D,
     )
 
     _BUILTINS_ = (
+        "ContourPlot",
         "ContourPlot3D",
         "ParametricPlot3D",
         "SphericalPlot3D",
