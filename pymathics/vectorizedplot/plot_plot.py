@@ -47,7 +47,7 @@ class _Plot(Builtin, ABC):
             "appropriate list of constraints."
         ),
     }
-
+    context = "System`"
     options = Graphics.options.copy()
     options.update(
         {
@@ -185,6 +185,7 @@ class Plot(_Plot):
      = -Graphics-
     """
 
+    context = "System`"
     summary_text = "plot curves of one or more functions"
 
     def apply_function(self, f: Callable, x_value):

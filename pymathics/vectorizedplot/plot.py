@@ -556,7 +556,6 @@ class PlotOptions:
             plot_range = [symbol_type("System`Automatic")] * dim
             plot_range[-1] = pr
         self.plot_range = plot_range
-
         # ColorFunction and ColorFunctionScaling options
         # This was pulled from construct_density_plot (now eval_DensityPlot).
         # TODO: What does pop=True do? is it right?
